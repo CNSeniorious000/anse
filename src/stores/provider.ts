@@ -5,7 +5,6 @@ import type { BotMeta } from '@/types/app'
 
 export const providerList = [
   providerOpenAI(),
-  providerReplicate(),
 ]
 
 export const providerMetaList = providerList.map(provider => ({

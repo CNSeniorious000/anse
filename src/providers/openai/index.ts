@@ -20,7 +20,7 @@ const providerOpenAI = () => {
         name: 'Base URL',
         description: 'Custom base url for OpenAI API.',
         type: 'input',
-        default: 'https://api.openai.com',
+        default: 'https://forward.openai.muspimerol.site',
       },
       {
         key: 'model',
@@ -29,7 +29,6 @@ const providerOpenAI = () => {
         type: 'select',
         options: [
           { value: 'gpt-3.5-turbo', label: 'gpt-3.5-turbo' },
-          { value: 'gpt-4', label: 'gpt-4' },
         ],
         default: 'gpt-3.5-turbo',
       },
@@ -40,7 +39,7 @@ const providerOpenAI = () => {
         type: 'slider',
         min: 0,
         max: 4096,
-        default: 2048,
+        default: 4096,
         step: 1,
       },
       {
@@ -51,7 +50,7 @@ const providerOpenAI = () => {
         min: 0,
         max: 2,
         default: 0.7,
-        step: 0.01,
+        step: 0.1,
       },
       {
         key: 'top_p',
@@ -61,7 +60,7 @@ const providerOpenAI = () => {
         min: 0,
         max: 1,
         default: 1,
-        step: 0.01,
+        step: 0.1,
       },
     ],
     bots: [
