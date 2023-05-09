@@ -1,12 +1,8 @@
-import { useDark } from 'solidjs-use'
 import { Show, onMount } from 'solid-js'
+import { useDark } from '@/hooks'
 
 export default () => {
-  // TODO: it created twice, optimize that
-  const [isDark, setIsDark] = useDark({
-    storageKey: 'theme',
-    valueDark: 'dark',
-  })
+  const [isDark, setIsDark] = useDark()
 
   onMount(() => {
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isDark() ? '#222222' : '#fafafa')

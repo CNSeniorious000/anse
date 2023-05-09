@@ -19,6 +19,9 @@ dependencies:
   '@nanostores/solid':
     specifier: ^0.3.2
     version: 0.3.2(nanostores@0.7.4)(solid-js@1.6.12)
+  '@solid-primitives/clipboard':
+    specifier: ^1.5.4
+    version: 1.5.4(solid-js@1.6.12)
   '@solid-primitives/keyboard':
     specifier: ^1.1.0
     version: 1.1.0(solid-js@1.6.12)
@@ -115,9 +118,6 @@ dependencies:
   solid-transition-group:
     specifier: ^0.2.2
     version: 0.2.2(solid-js@1.6.12)
-  solidjs-use:
-    specifier: ^1.2.0
-    version: 1.2.0
   unified:
     specifier: ^10.1.2
     version: 10.1.2
@@ -129,6 +129,9 @@ devDependencies:
   '@iconify-json/carbon':
     specifier: ^1.1.16
     version: 1.1.16
+  '@iconify-json/ion':
+    specifier: ^1.1.10
+    version: 1.1.10
   '@iconify-json/simple-icons':
     specifier: ^1.1.48
     version: 1.1.48
@@ -1809,6 +1812,12 @@ packages:
       '@iconify/types': 2.0.0
     dev: true
 
+  /@iconify-json/ion@1.1.10:
+    resolution: {integrity: sha512-JH8T6Xzn+JtuONVXnP8ADRHWF9SdTRVrYpl8rnhKvHNE1qDgLGAMbUE645Irtycq6Xxg8VWGwtjEI8HmEKb21Q==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
   /@iconify-json/simple-icons@1.1.48:
     resolution: {integrity: sha512-haFEPmTPriak+bcmhJawCTW2N2KxcaNNpS3z5hofBUBlCzwRhjM+vU0eImJ6i51HNFlSozt8sxVOZtT7NsWZJg==}
     dependencies:
@@ -2073,6 +2082,15 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
+  /@solid-primitives/clipboard@1.5.4(solid-js@1.6.12):
+    resolution: {integrity: sha512-cycedcO71We6idHomneUC/EqcgWihjSpYKKJSzicBu/Pwly2eudnZ51q91U0LdKraPYRtT+12lZOPPQ92ehLCQ==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
+      '@solid-primitives/utils': 6.0.0(solid-js@1.6.12)
+      solid-js: 1.6.12
+    dev: false
+
   /@solid-primitives/event-listener@2.2.10(solid-js@1.6.12):
     resolution: {integrity: sha512-rWBCeF1NRAmLJtVo2wpY9vF3IAQ8VAxGnFDOUqROSdYhUfiCeM7Hw3PKkGCELwNQzZK1W1z+MjzB7fctpjX4Sg==}
     peerDependencies:
@@ -2153,16 +2171,6 @@ packages:
       solid-js: ^1.6.12
     dependencies:
       solid-js: 1.6.12
-    dev: false
-
-  /@solidjs-use/shared@1.2.0:
-    resolution: {integrity: sha512-HkGJl6c3XDlusLFJw+4JKUCiW6PZ1xw+brMZdyGMfDbr+RQZXrLfu61WbGhVpY5BPy/+P93gS4+WKpBhOqkz6Q==}
-    dependencies:
-      '@solidjs-use/solid-to-vue': 1.2.0
-    dev: false
-
-  /@solidjs-use/solid-to-vue@1.2.0:
-    resolution: {integrity: sha512-ZmIThxUeX+D40ck0bviDEhta2WSpJd2AQYFF+rjO8zQmgySifeeiEc0Kn/Sp1BMHbLMcLboPYdOnT+6E1E9OLg==}
     dev: false
 
   /@surma/rollup-plugin-off-main-thread@2.2.3:
@@ -2313,10 +2321,6 @@ packages:
 
   /@types/unist@2.0.6:
     resolution: {integrity: sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==}
-
-  /@types/web-bluetooth@0.0.16:
-    resolution: {integrity: sha512-oh8q2Zc32S6gd/j50GowEjKLoOVOwHP/bWVjKJInBwQqdOYMdPrf1oVlelTlyfFK3CKxL1uahMDAr+vy8T7yMQ==}
-    dev: false
 
   /@types/yargs-parser@21.0.0:
     resolution: {integrity: sha512-iO9ZQHkZxHn4mSakYV0vFHAVDyEOIJQrV2uZ06HxEPcx+mt8swXoZHIbaaJ2crJYFfErySgktuTZ3BeLz+XmFA==}
@@ -8513,13 +8517,6 @@ packages:
       '@solid-primitives/refs': 1.0.2(solid-js@1.6.12)
       '@solid-primitives/transition-group': 1.0.1(solid-js@1.6.12)
       solid-js: 1.6.12
-    dev: false
-
-  /solidjs-use@1.2.0:
-    resolution: {integrity: sha512-Ylx/ggV/eQ9CMHDux29XKh+23yLmEh+seu/FAbRO41cQzKqi1X/038xSyQwWulPHRGrFBxEggPVQ0WmotTtquA==}
-    dependencies:
-      '@solidjs-use/shared': 1.2.0
-      '@types/web-bluetooth': 0.0.16
     dev: false
 
   /source-map-js@1.0.2:

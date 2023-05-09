@@ -4,8 +4,9 @@
 
 Anse is a fully optimized UI for AI Chats.
 
-- [Visit anse.app](https://anse.app)
-- [Documentation](https://docs.anse.app)
+- 🍿 **Live preview**: https://anse.app
+- 📖 **Documentation**: https://docs.anse.app
+- ✨ **Release Notes**: https://github.com/anse-app/anse/releases
 
 ## Features
 
@@ -39,6 +40,9 @@ Anse is a fully optimized UI for AI Chats.
     pnpm run dev
    ```
 3. Add your [OpenAI API key](https://platform.openai.com/account/api-keys) to the settings panel, then enjoy it!
+
+## How to deploy
+For more details, please refer to this document: https://docs.anse.app/self-deploy
 
 ## Frequently Asked Questions
 

@@ -8,13 +8,15 @@ export interface MenuItem {
   id: string
   label: string | JSXElement
   icon?: string
-  // TODO: nested menu
   children?: MenuItem[]
+  role?: string
+  action?: (params?: any) => void
 }
 
 interface Props {
   children: JSX.Element
   menuList: MenuItem[]
+  close?: boolean
 }
 
 export const DropDownMenu = (props: Props) => {
@@ -22,7 +24,11 @@ export const DropDownMenu = (props: Props) => {
     menu.machine({
       id: createUniqueId(),
       onSelect(details) {
-        console.log(details)
+        if (details.value) {
+          const currentAction = props.menuList.find(item => item.id === details.value)?.action
+          if (typeof currentAction === 'function')
+            currentAction()
+        }
       },
     }),
   )
@@ -43,12 +49,12 @@ export const DropDownMenu = (props: Props) => {
   })
 
   return (
-    <div>
+    <div id="DropDownMenuRef" class="!outline-none" >
       <Dynamic component={resolvedChild} />
       <Show when={api().isOpen}>
         <Portal>
           <div {...api().positionerProps} z-20>
-            <div {...api().contentProps} class=" bg-white dark-bg-zinc-900 flex flex-col space-y-1 rounded-md shadow-md">
+            <div {...api().contentProps} class="bg-white dark-bg-zinc-900 flex flex-col space-y-1 rounded-md shadow-md ">
               <Show when={api().isOpen}>
                 <For each={props.menuList}>
                   {item => (<div class="px-3 py-2 flex items-center space-x-2 hv-base" {...api().getItemProps({ id: item.id })}>{item.icon && <div class={item.icon} />}<div>{item.label}</div></div>)}
