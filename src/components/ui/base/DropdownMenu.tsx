@@ -43,27 +43,25 @@ export const DropDownMenu = (props: Props) => {
     return child
   }
 
-  createEffect(() => {
-    // https://github.com/chakra-ui/zag/issues/595
-    api().setPositioning({})
-  })
-
   return (
-    <div id="DropDownMenuRef" class="!outline-none" >
+    <div>
       <Dynamic component={resolvedChild} />
-      <Show when={api().isOpen}>
-        <Portal>
-          <div {...api().positionerProps} z-20>
-            <div {...api().contentProps} class="bg-white dark-bg-zinc-900 flex flex-col space-y-1 rounded-md shadow-md ">
-              <Show when={api().isOpen}>
-                <For each={props.menuList}>
-                  {item => (<div class="px-3 py-2 flex items-center space-x-2 hv-base" {...api().getItemProps({ id: item.id })}>{item.icon && <div class={item.icon} />}<div>{item.label}</div></div>)}
-                </For>
-              </Show>
+      <Portal>
+        <Show when={props.children}>
+          <div {...api().positionerProps}>
+            <div {...api().contentProps} class="bg-base text-sm border border-base rounded-md outline-none overflow-hidden shadow-md">
+              <For each={props.menuList}>
+                {item => (
+                  <div class="px-3 py-2 flex items-center space-x-2 hv-base" {...api().getItemProps({ id: item.id })}>
+                    {item.icon && <div class={item.icon} />}
+                    <div>{item.label}</div>
+                  </div>
+                )}
+              </For>
             </div>
           </div>
-        </Portal>
-      </Show>
+        </Show>
+      </Portal>
     </div>
   )
 }
