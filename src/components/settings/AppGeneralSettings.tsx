@@ -32,7 +32,7 @@ export default (props: Props) => {
               <SettingsUIComponent
                 settings={item}
                 editing={() => true}
-                value={() => props.settingsValue()[item.key] || false}
+                value={() => false}
                 setValue={(v) => {
                   props.updateSettings({ [item.key]: v as boolean })
                 }}

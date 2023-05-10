@@ -22,6 +22,7 @@ export const promptHelper = {
       '1. Must use the same language as input.',
       '2. Output the title directly, do not add any other content.',
       'The input is:',
+      '---',
       text,
     ].join('\n')
   },
