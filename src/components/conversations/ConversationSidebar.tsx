@@ -13,12 +13,12 @@ export default () => {
         Conversations
       </div>
       <div class="flex-1 overflow-auto">
+        <ConversationSidebarAdd />
         <For each={$conversationMapSortList()}>
           {instance => (
             <ConversationSidebarItem instance={instance} />
           )}
         </For>
-        <ConversationSidebarAdd />
       </div>
     </div>
   )
