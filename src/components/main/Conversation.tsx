@@ -2,7 +2,6 @@ import { Match, Switch } from 'solid-js'
 import { useStore } from '@nanostores/solid'
 import { conversationMap, currentConversationId } from '@/stores/conversation'
 import { conversationMessagesMap } from '@/stores/messages'
-import { loadingStateMap, streamsMap } from '@/stores/streams'
 import { getBotMetaById } from '@/stores/provider'
 import ConversationEmpty from './ConversationEmpty'
 import Welcome from './Welcome'
@@ -14,8 +13,6 @@ export default () => {
   const $conversationMap = useStore(conversationMap)
   const $conversationMessagesMap = useStore(conversationMessagesMap)
   const $currentConversationId = useStore(currentConversationId)
-  const $streamsMap = useStore(streamsMap)
-  const $loadingStateMap = useStore(loadingStateMap)
 
   const currentConversation = () => {
     return $conversationMap()[$currentConversationId()]
@@ -26,8 +23,6 @@ export default () => {
   const currentConversationMessages = () => {
     return $conversationMessagesMap()[$currentConversationId()] || []
   }
-  const isStreaming = () => !!$streamsMap()[$currentConversationId()]
-  const isLoading = () => !!$loadingStateMap()[$currentConversationId()]
 
   return (
     <Switch

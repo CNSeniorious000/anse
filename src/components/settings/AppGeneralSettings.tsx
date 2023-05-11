@@ -1,10 +1,8 @@
 import { For } from 'solid-js'
 import SettingsUIComponent from './SettingsUIComponent'
-import type { Accessor } from 'solid-js'
 import type { GeneralSettings } from '@/types/app'
 
 interface Props {
-  settingsValue: Accessor<GeneralSettings>
   updateSettings: (v: Partial<GeneralSettings>) => void
 }
 

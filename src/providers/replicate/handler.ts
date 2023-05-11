@@ -1,8 +1,7 @@
 import { fetchImageGeneration } from './api'
 import type { HandlerPayload, Provider } from '@/types/provider'
-import type { Message } from '@/types/message'
 
-export const handlePrompt: Provider['handlePrompt'] = async(payload, signal?: AbortSignal) => {
+export const handlePrompt: Provider['handlePrompt'] = async(payload) => {
   if (payload.botId === 'stable-diffusion')
     return handleStableDiffusion(payload)
 }

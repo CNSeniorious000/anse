@@ -37,10 +37,6 @@ export default (props: Props) => {
     })
   }
 
-  const handleOpenMockMessages = () => {
-    // TODO
-  }
-
   return (
     <div class="flex flex-col gap-4">
       <div
