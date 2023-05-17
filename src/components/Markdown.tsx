@@ -33,7 +33,7 @@ export default (props: Props) => {
 
   return (
     <Show when={props.showRawCode} fallback={<div class={props.class ?? ''} innerHTML={htmlString()} />}>
-      <div class={`${props.class ?? ''} whitespace-pre-wrap overflow-auto my-0`} innerText={htmlString()} />
+      <div class={`${props.class ?? ''} whitespace-pre-wrap overflow-auto my-0 font-mono`} innerText={htmlString()} />
     </Show>
   )
 }
