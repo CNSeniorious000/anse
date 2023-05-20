@@ -16,8 +16,8 @@ export default () => {
             <For each={$conversationMapSortList().slice(0, 3)}>
               {instance => (
                 <div class="fi gap-2 h-8 max-w-full hv-foreground" onClick={() => currentConversationId.set(instance.id)}>
-                  {instance.icon ? instance.icon : <div class="text-sm i-carbon-chat" />}
-                  <div class="flex-1 text-sm truncate">{instance.name || 'Untitled'}</div>
+                  {instance.icon ? instance.icon : <div class="text-sm i-carbon-chat-launch" />}
+                  <div class="flex-1 text-sm truncate">{instance.name || t('conversations.untitled')}</div>
                 </div>
               )}
             </For>
