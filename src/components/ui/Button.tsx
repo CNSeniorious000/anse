@@ -28,7 +28,7 @@ export default (props: Props) => {
   return (
     <div
       class={[
-        'fi gap-1 rounded-md cursor-pointer transition-colors',
+        'fi gap-1 rounded-md cursor-pointer transition-all active:scale-95 duration-100',
         buttonVariantClass,
         buttonSizeClass,
       ].join(' ')}
