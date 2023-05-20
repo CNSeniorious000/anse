@@ -1,4 +1,4 @@
-import { Match, Switch, createEffect } from 'solid-js'
+import { Match, Switch } from 'solid-js'
 import { useStore } from '@nanostores/solid'
 import { conversationMap, currentConversationId } from '@/stores/conversation'
 import { conversationMessagesMap } from '@/stores/messages'
@@ -23,8 +23,6 @@ export default () => {
   const currentConversationMessages = () => {
     return $conversationMessagesMap()[$currentConversationId()] || []
   }
-
-  createEffect(() => { document.title = currentConversation() ? `Anse • ${currentConversation().name || 'New Chat'}` : 'Anse' })
 
   return (
     <Switch

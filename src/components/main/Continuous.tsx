@@ -23,16 +23,16 @@ export default (props: Props) => {
   })
   createEffect(on(() => props.conversationId, () => {
     setTimeout(() => {
-      instantScrollToBottomThrottle(scrollRef)
+      instantScrollToBottom(scrollRef)
     }, 0)
   }))
 
-  const instantScrollToBottomThrottle = leading(throttle, (element: HTMLDivElement) => {
-    isScrollBottom() && element.scrollTo({ top: element.scrollHeight, behavior: 'smooth' })
-  }, 250)
+  const instantScrollToBottom = (element: HTMLDivElement) => {
+    isScrollBottom() && element.scrollTo({ top: element.scrollHeight, behavior: 'instant' })
+  }
 
   const handleStreamableTextUpdate = () => {
-    instantScrollToBottomThrottle(scrollRef)
+    instantScrollToBottom(scrollRef)
   }
 
   return (
