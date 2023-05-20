@@ -15,26 +15,40 @@ export default () => {
 
   const [duringTransition, setDuringTransition] = createSignal(false)
 
-  let oldName = displayName()
+  let nowName = displayName()
 
   let nameTransitionLoop: NodeJS.Timer | null = null
-  let titleTransitionLoop: NodeJS.Timer | null = null
+  let titleTransitionLoop: NodeJS.Timeout | null = null
 
   createEffect(() => {
     const newName = currentConversation() ? (currentConversation().name || t('conversations.untitled')) : ''
-    nameTransitionLoop && clearInterval(nameTransitionLoop)
-    nameTransitionLoop = setInterval(() => {
-      // console.log({ oldName, newName })
-      if (oldName !== newName) {
-        oldName = newName.startsWith(oldName) ? newName.slice(0, oldName.length + 1) : oldName.slice(0, -1)
-        setDisplayName(oldName)
+    nameTransitionLoop && clearTimeout(nameTransitionLoop)
+
+    const oldLength = nowName.length
+    const newLength = newName.length
+
+    function stepAfter(interval: number) {
+      nameTransitionLoop = setTimeout(() => {
         setDuringTransition(true)
-      } else {
-        clearInterval(nameTransitionLoop as NodeJS.Timer)
-        nameTransitionLoop = null
-        setDuringTransition(false)
-      }
-    }, 1000 / 60)
+        console.log({ oldName: nowName, newName })
+        if (nowName !== newName) {
+          if (newName.startsWith(nowName)) {
+            nowName = newName.slice(0, nowName.length + 1)
+            setDisplayName(nowName)
+            stepAfter(newLength * 40 / (nowName.length * (newLength - nowName.length)))
+          } else {
+            nowName = nowName.slice(0, -1)
+            setDisplayName(nowName)
+            stepAfter(oldLength * 40 / (nowName.length * (oldLength - nowName.length)))
+          }
+        } else {
+          nameTransitionLoop = null
+          setDuringTransition(false)
+        }
+      }, interval)
+    }
+
+    stepAfter(1)
   })
 
   createEffect(() => {
@@ -42,7 +56,6 @@ export default () => {
     const thisTitle = currentConversation() ? `Anse • ${currentConversation().name || 'New Chat'}` : 'Anse'
     titleTransitionLoop && clearInterval(titleTransitionLoop)
     titleTransitionLoop = setInterval(() => {
-      // console.log({ lastTitle, thisTitle })
       if (lastTitle !== thisTitle) {
         thisTitle.startsWith(lastTitle) ? (lastTitle = thisTitle.slice(0, lastTitle.length + 1)) : (lastTitle = lastTitle.slice(0, -1))
         document.title = `${lastTitle} •`

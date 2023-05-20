@@ -28,7 +28,7 @@ export default ({ instance }: Props) => {
   return (
     <div
       class={[
-        'group fi h-10 my-0.5 px-2 gap-2 hv-base rounded-md',
+        'group fi h-10 my-0.5 px-2 gap-2 hv-base rounded-md active:scale-97 transition-all duration-100',
         instance.id === $currentConversationId() ? 'bg-base-200' : '',
       ].join(' ')}
       onClick={handleClick}
