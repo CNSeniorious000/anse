@@ -28,7 +28,7 @@ export default (props: Props) => {
   }))
 
   const instantScrollToBottomThrottle = leading(throttle, (element: HTMLDivElement) => {
-    isScrollBottom() && element.scrollTo({ top: element.scrollHeight })
+    isScrollBottom() && element.scrollTo({ top: element.scrollHeight, behavior: 'smooth' })
   }, 250)
 
   const handleStreamableTextUpdate = () => {
@@ -40,7 +40,7 @@ export default (props: Props) => {
       <div class="scroll-list relative flex flex-col h-full overflow-y-scroll" ref={scrollRef!}>
         <For each={props.messages()}>
           {(message, index) => (
-            <div class="border-b border-lighter">
+            <div class="border-b border-base">
               <MessageItem
                 conversationId={props.conversationId}
                 message={message}
@@ -58,7 +58,7 @@ export default (props: Props) => {
         >
           <div class="fcc h-8 max-w-base text-xs op-50 gap-1">
             <div>Scroll to bottom</div>
-            <div i-carbon-arrow-down />
+            <div i-carbon-chevron-down />
           </div>
         </div>
       </Show>

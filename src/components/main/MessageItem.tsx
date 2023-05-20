@@ -9,6 +9,7 @@ import { scrollController } from '@/stores/ui'
 import { globalAbortController } from '@/stores/settings'
 import StreamableText from '../StreamableText'
 import { DropDownMenu, Tooltip } from '../ui/base'
+import Button from '../ui/Button'
 import type { MenuItem } from '../ui/base'
 import type { MessageInstance } from '@/types/message'
 
@@ -74,13 +75,13 @@ export default (props: Props) => {
   }
 
   const [menuList, setMenuList] = createSignal<MenuItem[]>([
-    { id: 'retry', label: 'Retry send', icon: 'i-carbon:restart', role: 'all', action: handleRetryMessageItem },
-    { id: 'raw', label: 'Show raw code', icon: 'i-carbon-code', role: 'system', action: () => setShowRawCode(!showRawCode()) },
+    { id: 'retry', label: 'Send here', icon: 'i-carbon-send', role: 'all', action: handleRetryMessageItem },
+    { id: 'raw', label: 'Show raw text', icon: 'i-carbon-code', role: 'system', action: () => setShowRawCode(!showRawCode()) },
     // TODO: Share message
     // { id: 'share', label: 'Share message', icon: 'i-carbon:share' },
-    { id: 'edit', label: 'Edit message', icon: 'i-carbon:edit', role: 'user', action: handleEditMessageItem },
-    { id: 'copy', label: 'Copy message', icon: 'i-carbon-copy', role: 'all', action: handleCopyMessageItem },
-    { id: 'delete', label: 'Delete message', icon: 'i-carbon-trash-can', role: 'all', action: handleDeleteMessageItem },
+    { id: 'edit', label: 'Edit', icon: 'i-carbon:edit', role: 'user', action: handleEditMessageItem },
+    { id: 'copy', label: 'Copy', icon: 'i-carbon-copy', role: 'all', action: handleCopyMessageItem },
+    { id: 'delete', label: 'Delete', icon: 'i-carbon-trash-can', role: 'all', action: handleDeleteMessageItem },
   ])
 
   if (props.message.role === 'user')
@@ -103,9 +104,9 @@ export default (props: Props) => {
     >
       <div class="max-w-base flex gap-4 overflow-hidden">
         <div class={`shrink-0 w-7 h-7 rounded-md op-80 ${roleClass[props.message.role]}`} />
-        <div id="menuList-wrapper" class={`sm:hidden block absolute bottom-2 right-4 z-10 op-70 cursor-pointer ${isEditing() && '!hidden'}`}>
+        <div id="menuList-wrapper" class={`sm:hidden block absolute bottom-2 right-4 op-70 cursor-pointer ${isEditing() && '!hidden'}`}>
           <DropDownMenu menuList={menuList()}>
-            <div class="text-xl i-carbon:overflow-menu-horizontal" />
+            <div class="text-xl i-carbon:overflow-menu-horizontal !bg-current" />
           </DropDownMenu>
         </div>
         <div class={`hidden sm:block absolute right-6 -top-4 ${!props.index && 'top-0'} ${isEditing() && '!hidden'}`}>
@@ -114,9 +115,11 @@ export default (props: Props) => {
               {item => (
                 <Tooltip tip={item.label} handleChildClick={item.action}>
                   {
-                    item.id === 'copy'
-                      ? <div class={`menu-icon ${copied() ? 'i-carbon-checkmark !text-emerald-400' : 'i-carbon-copy'}`} />
-                      : <div class={`${item.icon} menu-icon`} />
+                    (() => {
+                      if (item.id === 'copy') return <div class={`menu-icon ${copied() ? 'i-carbon-checkmark !text-emerald-400' : 'i-carbon-copy'}`} />
+                      else if (item.id === 'raw') return <div class={`menu-icon ${showRawCode() ? 'i-carbon-code-hide !text-emerald-400' : 'i-carbon-code'}`} />
+                      else return <div class={`${item.icon} menu-icon`} />
+                    })()
                   }
                 </Tooltip>)}
             </For>
@@ -135,9 +138,9 @@ export default (props: Props) => {
               class="op-70 bg-darker py-4 px-[calc(max(1.5rem,(100%-48rem)/2))] w-full inset-0 scroll-pa-4 input-base rounded-md"
             />
 
-            <div class="flex justify-end space-x-2 -mt-1">
-              <div class="inline-flex items-center button" onClick={() => setIsEditing(false)}>Cancel</div>
-              <div class="inline-flex items-center button" onClick={() => handleSend()}>Submit</div>
+            <div class="flex justify-end space-x-2 mt-1">
+              <Button size="sm" onClick={() => setIsEditing(false)}>Cancel</Button>
+              <Button size="sm" onClick={() => handleSend()}>Submit</Button>
             </div>
           </Show>
           <Show when={!isEditing()}>
