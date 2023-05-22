@@ -91,8 +91,8 @@ export default (props: Props) => {
 
   const roleClass = {
     system: 'bg-gradient-to-b from-gray-300 via-gray-200 to-gray-300',
-    user: 'bg-gradient-to-b from-gray-300 via-gray-200 to-gray-300',
-    assistant: 'bg-gradient-to-b from-[#fccb90] to-[#d57eeb]',
+    user: 'bg-gradient-to-b from-gray-300/35 to-gray-400/35',
+    assistant: 'bg-gradient-to-b from-[#d0b6fa] to-[#947cff]',
   }
 
   return (
