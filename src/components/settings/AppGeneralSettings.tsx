@@ -2,10 +2,12 @@ import { For } from 'solid-js'
 import { localesOptions } from '@/locale'
 import { useI18n } from '@/hooks'
 import SettingsUIComponent from './SettingsUIComponent'
+import type { Accessor } from 'solid-js'
 import type { GeneralSettings } from '@/types/app'
 import type { SettingsUI } from '@/types/provider'
 
 interface Props {
+  settingsValue: Accessor<GeneralSettings>
   updateSettings: (v: Partial<GeneralSettings>) => void
 }
 
@@ -43,7 +45,7 @@ export default (props: Props) => {
               <SettingsUIComponent
                 settings={item}
                 editing={() => true}
-                value={() => false}
+                value={() => props.settingsValue()[item.key as keyof GeneralSettings] || item.default || ''}
                 setValue={(v) => {
                   props.updateSettings({ [item.key]: v })
                 }}
