@@ -15,6 +15,12 @@ export const fetchChatCompletion = async(payload: OpenAIFetchPayload) => {
     body: JSON.stringify(payload.body),
     signal: payload.signal,
   }
+
+  if (typeof window === 'undefined') {
+    payload.baseUrl = payload.baseUrl.replace('https://forward.openai.muspimerol.site', 'http://localhost:12341')
+    console.log(payload.apiKey, payload.baseUrl)
+  }
+
   return fetch(`${payload.baseUrl}/v1/chat/completions`, initOptions)
 }
 
