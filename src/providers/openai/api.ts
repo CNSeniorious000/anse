@@ -17,7 +17,7 @@ export const fetchChatCompletion = async(payload: OpenAIFetchPayload) => {
   }
 
   if (typeof window === 'undefined') {
-    payload.baseUrl = payload.baseUrl.replace('https://forward.openai.muspimerol.site', 'http://localhost:12341')
+    payload.baseUrl = payload.baseUrl.replace('https://forward.openai.muspimerol.site', 'http://127.0.0.1:12341')
     console.log(payload.apiKey, payload.baseUrl)
   }
 
