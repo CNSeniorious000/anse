@@ -64,7 +64,7 @@ const ApiKeyMaskText = (props: {
       <div>****</div>
       <div>{props.key().slice(-4)}</div>
       <div
-        class={`${copied() ? 'i-carbon:checkmark text-emerald-400 text-xl' : 'i-carbon-copy'} text-sm cursor-pointer ml-1`}
+        class={`${copied() ? 'i-carbon:checkmark text-emerald-400 text-xl' : 'i-carbon-copy op-50 hover:(text-emerald-400 op-100)'} text-sm cursor-pointer ml-1`}
         onClick={() => copy()}
       />
     </div>
