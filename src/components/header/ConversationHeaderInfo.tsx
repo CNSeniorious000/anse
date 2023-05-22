@@ -1,4 +1,4 @@
-import { Show, createEffect, createMemo, createSignal } from 'solid-js'
+import { Show, createEffect, createSignal } from 'solid-js'
 import { useStore } from '@nanostores/solid'
 import { conversationMap, currentConversationId } from '@/stores/conversation'
 import { useI18n } from '@/hooks'
@@ -30,7 +30,6 @@ export default () => {
     function stepAfter(interval: number) {
       nameTransitionLoop = setTimeout(() => {
         setDuringTransition(true)
-        console.log({ oldName: nowName, newName })
         if (nowName !== newName) {
           if (newName.startsWith(nowName)) {
             nowName = newName.slice(0, nowName.length + 1)
