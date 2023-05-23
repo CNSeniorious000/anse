@@ -36,6 +36,14 @@ export default () => {
     useMobileScreen(() => {
       setFooterClass('sticky bottom-0 left-0 right-0 overflow-hidden')
     })
+
+    addEventListener('keydown', (e) => {
+      if (e.code === 'Slash') {
+        isSendBoxFocus.set(true)
+        inputRef.focus()
+        e.preventDefault()
+      }
+    })
   })
 
   const stateType = () => {
