@@ -1,4 +1,5 @@
 import { useStore } from '@nanostores/solid'
+import { onMount } from 'solid-js'
 import { currentConversationId } from '@/stores/conversation'
 import {
   scrollController,
@@ -7,6 +8,12 @@ import {
 import { clearMessagesByConversationId } from '@/stores/messages'
 import { useI18n } from '@/hooks'
 import ConfirmModal from '../ui/ConfirmModal'
+
+onMount(() => {
+  addEventListener('keydown', (e) => {
+    if (e.altKey && e.code === 'KeyC') showConfirmModal.set(true)
+  })
+})
 
 export default () => {
   const $currentConversationId = useStore(currentConversationId)

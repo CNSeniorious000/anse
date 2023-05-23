@@ -1,4 +1,5 @@
 import { useStore } from '@nanostores/solid'
+import { onMount } from 'solid-js'
 import { currentConversationId, deleteConversationById } from '@/stores/conversation'
 import { showConversationSidebar } from '@/stores/ui'
 import { useI18n } from '@/hooks'
@@ -11,6 +12,16 @@ interface Props {
 }
 
 export default ({ instance }: Props) => {
+  onMount(() => {
+    window.addEventListener('keydown', (e) => {
+      if (instance.id === $currentConversationId() && e.altKey && e.code === 'KeyW') {
+        e.stopPropagation()
+        currentConversationId.set('')
+        deleteConversationById(instance.id)
+      }
+    })
+  })
+
   const { t } = useI18n()
   const $currentConversationId = useStore(currentConversationId)
   const isTouchDevice = 'ontouchstart' in document.documentElement || navigator.maxTouchPoints > 0
