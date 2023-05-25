@@ -38,7 +38,7 @@ export default () => {
     })
 
     addEventListener('keydown', (e) => {
-      if (e.code === 'Slash') {
+      if (e.code === 'Slash' && stateType() === 'normal') {
         isSendBoxFocus.set(true)
         inputRef.focus()
         e.preventDefault()
