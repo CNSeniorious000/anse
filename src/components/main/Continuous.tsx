@@ -1,7 +1,6 @@
 import { For, Show, createEffect, createSignal, on } from 'solid-js'
 import { useStore } from '@nanostores/solid'
 import { createScrollPosition } from '@solid-primitives/scroll'
-import { leading, throttle } from '@solid-primitives/scheduled'
 import { isSendBoxFocus } from '@/stores/ui'
 import MessageItem from './MessageItem'
 import type { Accessor } from 'solid-js'
