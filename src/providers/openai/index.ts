@@ -16,13 +16,6 @@ const providerOpenAI = () => {
         type: 'api-key',
       },
       {
-        key: 'baseUrl',
-        name: 'Base URL',
-        description: 'Custom base url for OpenAI API.',
-        type: 'input',
-        default: 'https://forward.openai.muspimerol.site',
-      },
-      {
         key: 'model',
         name: 'OpenAI model',
         description: 'Custom gpt model for OpenAI API.',
@@ -33,23 +26,13 @@ const providerOpenAI = () => {
         default: 'gpt-3.5-turbo',
       },
       {
-        key: 'maxTokens',
-        name: 'Max Tokens',
-        description: 'The maximum number of tokens to generate in the completion.',
-        type: 'slider',
-        min: 0,
-        max: 4096,
-        default: 4096,
-        step: 1,
-      },
-      {
         key: 'temperature',
         name: 'Temperature',
         type: 'slider',
         description: 'What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.',
         min: 0,
         max: 2,
-        default: 0.7,
+        default: 1,
         step: 0.1,
       },
       {

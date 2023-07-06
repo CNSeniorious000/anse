@@ -2,10 +2,10 @@ import { For, Show } from 'solid-js/web'
 import { createSignal } from 'solid-js'
 import { useStore } from '@nanostores/solid'
 import { useClipboardCopy } from '@/hooks'
-import { deleteMessageByConversationId, spliceMessageByConversationId, spliceUpdateMessageByConversationId } from '@/stores/messages'
-import { conversationMap } from '@/stores/conversation'
+import { deleteMessageByConversationId, getMessagesByConversationId, spliceMessageByConversationId, spliceUpdateMessageByConversationId, updateMessage } from '@/stores/messages'
+import { conversationMap, currentConversationId } from '@/stores/conversation'
 import { handlePrompt } from '@/logics/conversation'
-import { scrollController } from '@/stores/ui'
+import { scrollController, showShareModal } from '@/stores/ui'
 import { globalAbortController } from '@/stores/settings'
 import StreamableText from '../StreamableText'
 import { DropDownMenu, Tooltip } from '../ui/base'
@@ -23,6 +23,7 @@ interface Props {
 export default (props: Props) => {
   let inputRef: HTMLTextAreaElement
   const $conversationMap = useStore(conversationMap)
+  const $currentConversationId = useStore(currentConversationId)
 
   const [showRawCode, setShowRawCode] = createSignal(false)
   const [copied, setCopied] = createSignal(false)
@@ -58,6 +59,15 @@ export default (props: Props) => {
     inputRef.focus()
   }
 
+  const handleShareMessageItem = () => {
+    const messages = getMessagesByConversationId($currentConversationId())
+    messages.forEach((message) => {
+      updateMessage($currentConversationId(), message.id, { isSelected: props.message.id === message.id },
+      )
+    })
+    showShareModal.set(true)
+  }
+
   const handleSend = () => {
     if (!inputRef.value)
       return
@@ -75,13 +85,12 @@ export default (props: Props) => {
   }
 
   const [menuList, setMenuList] = createSignal<MenuItem[]>([
-    { id: 'retry', label: 'Send here', icon: 'i-carbon-send', role: 'all', action: handleRetryMessageItem },
+    { id: 'retry', label: 'Send from here', icon: 'i-carbon-send', role: 'all', action: handleRetryMessageItem },
     { id: 'raw', label: 'Show raw text', icon: 'i-carbon-code', role: 'system', action: () => setShowRawCode(!showRawCode()) },
-    // TODO: Share message
-    // { id: 'share', label: 'Share message', icon: 'i-carbon:share' },
     { id: 'edit', label: 'Edit', icon: 'i-carbon:edit', role: 'user', action: handleEditMessageItem },
     { id: 'copy', label: 'Copy', icon: 'i-carbon-copy', role: 'all', action: handleCopyMessageItem },
     { id: 'delete', label: 'Delete', icon: 'i-carbon-trash-can', role: 'all', action: handleDeleteMessageItem },
+    { id: 'share', label: 'Share message', icon: 'i-carbon:export', role: 'all', action: handleShareMessageItem },
   ])
 
   if (props.message.role === 'user')
@@ -97,20 +106,20 @@ export default (props: Props) => {
 
   return (
     <div
-      class="p-6 break-words group relative"
+      class="bg-base p-6 break-words group relative"
       classList={{
         'bg-base-100': props.message.role === 'user',
       }}
     >
-      <div class="max-w-base flex gap-4 overflow-hidden">
+      <div class="flex max-w-base gap-4 overflow-hidden">
         <div class={`shrink-0 w-7 h-7 rounded-md op-80 ${roleClass[props.message.role]}`} />
-        <div id="menuList-wrapper" class={`sm:hidden block absolute bottom-2 right-4 op-70 cursor-pointer ${isEditing() && '!hidden'}`}>
+        <div id="menuList-wrapper" class={`sm:hidden block absolute bottom-2 right-4 z-10 cursor-pointer op-0 group-hover-op-70 ${isEditing() && '!hidden'}`}>
           <DropDownMenu menuList={menuList()}>
             <div class="text-xl i-carbon:overflow-menu-horizontal !bg-current" />
           </DropDownMenu>
         </div>
         <div class={`hidden sm:block absolute right-6 -top-4 ${!props.index && 'top-0'} ${isEditing() && '!hidden'}`}>
-          <div class="op-0 group-hover:op-80 fcc space-x-2 !bg-base px-2 py-1 rounded-md border border-base transition-opacity">
+          <div class="border border-base rounded-md space-x-2 py-1 px-2 transition-opacity fcc op-0 !bg-base group-hover:op-80">
             <For each={menuList()}>
               {item => (
                 <Tooltip tip={item.label} handleChildClick={item.action}>
@@ -135,12 +144,12 @@ export default (props: Props) => {
               onKeyDown={(e) => {
                 e.key === 'Enter' && !e.isComposing && !e.shiftKey && handleSend()
               }}
-              class="op-70 bg-darker py-4 px-[calc(max(1.5rem,(100%-48rem)/2))] w-full inset-0 scroll-pa-4 input-base rounded-md"
+              class="bg-darker rounded-md w-full py-4 px-[calc(max(1.5rem,(100%-48rem)/2))] inset-0 input-base op-70 scroll-pa-4"
             />
 
-            <div class="flex justify-end space-x-2 mt-1">
+            <div class="flex space-x-2 mt-1 justify-end">
               <Button size="sm" onClick={() => setIsEditing(false)}>Cancel</Button>
-              <Button size="sm" onClick={() => handleSend()}>Submit</Button>
+              <Button size="sm" variant="primary" onClick={() => handleSend()}>Submit</Button>
             </div>
           </Show>
           <Show when={!isEditing()}>
