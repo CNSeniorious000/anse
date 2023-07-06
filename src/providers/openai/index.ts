@@ -26,6 +26,16 @@ const providerOpenAI = () => {
         default: 'gpt-3.5-turbo',
       },
       {
+        key: 'maxTokens',
+        name: 'Max Tokens',
+        description: 'The maximum number of tokens to generate in the completion.',
+        type: 'slider',
+        min: 0,
+        max: 4096,
+        default: 2048,
+        step: 1,
+      },
+      {
         key: 'temperature',
         name: 'Temperature',
         type: 'slider',
