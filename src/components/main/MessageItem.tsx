@@ -85,7 +85,7 @@ export default (props: Props) => {
   }
 
   const [menuList, setMenuList] = createSignal<MenuItem[]>([
-    { id: 'retry', label: 'Send here', icon: 'i-carbon-send', role: 'all', action: handleRetryMessageItem },
+    { id: 'retry', label: 'Send from here', icon: 'i-carbon-send', role: 'all', action: handleRetryMessageItem },
     { id: 'raw', label: 'Show raw text', icon: 'i-carbon-code', role: 'system', action: () => setShowRawCode(!showRawCode()) },
     { id: 'edit', label: 'Edit', icon: 'i-carbon:edit', role: 'user', action: handleEditMessageItem },
     { id: 'copy', label: 'Copy', icon: 'i-carbon-copy', role: 'all', action: handleCopyMessageItem },
