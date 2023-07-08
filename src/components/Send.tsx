@@ -34,7 +34,7 @@ export default () => {
     })
 
     addEventListener('keydown', (e) => {
-      if (e.code === 'Slash' && stateType() === 'normal') {
+      if (e.code === 'Slash' && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName ?? '')) {
         isSendBoxFocus.set(true)
         inputRef.focus()
         e.preventDefault()
