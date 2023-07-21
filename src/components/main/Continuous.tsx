@@ -2,6 +2,7 @@ import { For, Show, createEffect, createSignal, on } from 'solid-js'
 import { useStore } from '@nanostores/solid'
 import { createScrollPosition } from '@solid-primitives/scroll'
 import { isSendBoxFocus } from '@/stores/ui'
+import { useI18n } from '@/hooks'
 import MessageItem from './MessageItem'
 import type { Accessor } from 'solid-js'
 import type { MessageInstance } from '@/types/message'
@@ -13,6 +14,7 @@ interface Props {
 
 export default (props: Props) => {
   let scrollRef: HTMLDivElement
+  const { t } = useI18n()
   const $isSendBoxFocus = useStore(isSendBoxFocus)
   const [isScrollBottom, setIsScrollBottom] = createSignal(false)
   const scroll = createScrollPosition(() => scrollRef)
@@ -36,7 +38,7 @@ export default (props: Props) => {
 
   return (
     <>
-      <div class="scroll-list relative flex flex-col h-full overflow-y-scroll" ref={scrollRef!}>
+      <div class="flex flex-col h-full scroll-list relative overflow-y-scroll" ref={scrollRef!}>
         <div class="w-full">
           <For each={props.messages()}>
             {(message, index) => (
@@ -52,7 +54,7 @@ export default (props: Props) => {
           </For>
         </div>
         {/* use for html2Canvas */}
-        <div id="message_list_wrapper" class="w-full m-auto clipped hidden">
+        <div id="message_list_wrapper" class="m-auto w-full clipped hidden">
           <For each={props.messages().filter(item => item.isSelected)}>
             {(message, index) => (
               <div class="border-b border-base">
@@ -69,11 +71,11 @@ export default (props: Props) => {
       </div>
       <Show when={!isScrollBottom() && !$isSendBoxFocus()}>
         <div
-          class="absolute bottom-0 left-0 right-0 border-t border-base bg-blur hv-base"
+          class="bg-blur border-t border-base right-0 bottom-0 left-0 absolute hv-base"
           onClick={() => scrollRef!.scrollTo({ top: scrollRef.scrollHeight, behavior: 'smooth' })}
         >
-          <div class="fcc h-8 max-w-base text-xs op-50 gap-1">
-            <div>Scroll to bottom</div>
+          <div class="max-w-base h-8 text-xs gap-1 fcc op-50">
+            <div>{ t('scroll')}</div>
             <div i-carbon-chevron-down />
           </div>
         </div>

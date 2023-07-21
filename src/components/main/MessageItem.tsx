@@ -1,7 +1,7 @@
 import { For, Show } from 'solid-js/web'
 import { createSignal } from 'solid-js'
 import { useStore } from '@nanostores/solid'
-import { useClipboardCopy } from '@/hooks'
+import { useClipboardCopy, useI18n } from '@/hooks'
 import { deleteMessageByConversationId, getMessagesByConversationId, spliceMessageByConversationId, spliceUpdateMessageByConversationId, updateMessage } from '@/stores/messages'
 import { conversationMap, currentConversationId } from '@/stores/conversation'
 import { handlePrompt } from '@/logics/conversation'
@@ -22,6 +22,8 @@ interface Props {
 
 export default (props: Props) => {
   let inputRef: HTMLTextAreaElement
+
+  const { t } = useI18n()
   const $conversationMap = useStore(conversationMap)
   const $currentConversationId = useStore(currentConversationId)
 
@@ -139,6 +141,7 @@ export default (props: Props) => {
             <textarea
               ref={inputRef!}
               value={inputPrompt()}
+              title="chat"
               autocomplete="off"
               onInput={() => { setInputPrompt(inputRef.value) }}
               onKeyDown={(e) => {
@@ -148,8 +151,8 @@ export default (props: Props) => {
             />
 
             <div class="flex space-x-2 mt-1 justify-end">
-              <Button size="sm" onClick={() => setIsEditing(false)}>Cancel</Button>
-              <Button size="sm" variant="primary" onClick={() => handleSend()}>Submit</Button>
+              <Button size="sm" onClick={() => setIsEditing(false)}>{t('conversations.confirm.cancel')}</Button>
+              <Button size="sm" variant="primary" onClick={() => handleSend()}>{t('conversations.confirm.submit')}</Button>
             </div>
           </Show>
           <Show when={!isEditing()}>
