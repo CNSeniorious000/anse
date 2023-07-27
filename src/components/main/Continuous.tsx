@@ -1,4 +1,4 @@
-import { For, Show, createEffect, createSignal, on, onMount } from 'solid-js'
+import { For, Show, createEffect, createSignal, on, onCleanup, onMount } from 'solid-js'
 import { useStore } from '@nanostores/solid'
 import { createScrollPosition } from '@solid-primitives/scroll'
 import Lenis from '@studio-freight/lenis'
@@ -37,8 +37,11 @@ export default (props: Props) => {
     instantScrollToBottom(scrollRef)
   }
 
-  onMount(() => {
-    const lenis = new Lenis({ lerp: 0.3, wrapper: scrollRef, content: scrollRef, wheelEventsTarget: scrollRef })
+  let lenis: Lenis
+  let observer: MutationObserver
+
+  const initLenis = () => {
+    lenis = new Lenis({ lerp: 0.35, wrapper: scrollRef, content: scrollRef, autoResize: false })
 
     function raf(time: number) {
       lenis.raf(time)
@@ -46,6 +49,21 @@ export default (props: Props) => {
     }
 
     requestAnimationFrame(raf)
+  }
+
+  const resizeLenis = () => lenis.resize()
+
+  onMount(() => {
+    initLenis()
+    observer = new MutationObserver(resizeLenis)
+    observer.observe(scrollRef, { subtree: true, childList: true })
+    window.addEventListener('resize', resizeLenis)
+  })
+
+  onCleanup(() => {
+    lenis?.destroy()
+    observer?.disconnect()
+    window.removeEventListener('resize', resizeLenis)
   })
 
   return (
