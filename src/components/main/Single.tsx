@@ -20,7 +20,7 @@ export default ({ conversationId, messages }: Props) => {
   }
 
   return (
-    <div class="flex flex-col h-full">
+    <div class="flex flex-col h-full mt-14">
       <div class="flex-[1] border-b border-base p-6 break-words overflow-y-scroll">
         <StreamableText
           class="mx-auto"
