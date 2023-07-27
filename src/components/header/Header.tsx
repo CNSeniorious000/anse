@@ -15,7 +15,7 @@ export default () => {
     })
   })
   return (
-    <header onDblClick={scrollController().scrollToTop} class="shrink-0 absolute top-0 left-0 right-0 fi justify-between border-b border-base h-14 px-4">
+    <header onDblClick={scrollController().scrollToTop} class="shrink-0 absolute top-0 left-0 right-0 fi justify-between border-b border-base h-14 px-4 bg-header">
       <div class="fi overflow-hidden">
         <div
           class="fcc p-2 rounded-md text-xl hv-foreground md:hidden"
@@ -30,7 +30,7 @@ export default () => {
         <ConversationMessageClearButton />
         <ConversationMessageShareButton />
         <div
-          class="fcc p-2 rounded-md text-xl hv-foreground 2xl:hidden"
+          class="rounded-md text-xl p-2 fcc hv-foreground 2xl:hidden"
           onClick={() => showSettingsSidebar.set(true)}
         >
           <div i-carbon-settings />

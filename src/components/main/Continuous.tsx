@@ -39,7 +39,7 @@ export default (props: Props) => {
   return (
     <>
       <div class="flex flex-col h-full scroll-list relative overflow-y-scroll" ref={scrollRef!}>
-        <div class="w-full">
+        <div class="w-full mt-14">
           <For each={props.messages()}>
             {(message, index) => (
               <div class="border-b border-base">
