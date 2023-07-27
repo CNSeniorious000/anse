@@ -1,6 +1,7 @@
-import { For, Show, createEffect, createSignal, on } from 'solid-js'
+import { For, Show, createEffect, createSignal, on, onMount } from 'solid-js'
 import { useStore } from '@nanostores/solid'
 import { createScrollPosition } from '@solid-primitives/scroll'
+import Lenis from '@studio-freight/lenis'
 import { isSendBoxFocus } from '@/stores/ui'
 import { useI18n } from '@/hooks'
 import MessageItem from './MessageItem'
@@ -35,6 +36,17 @@ export default (props: Props) => {
   const handleStreamableTextUpdate = () => {
     instantScrollToBottom(scrollRef)
   }
+
+  onMount(() => {
+    const lenis = new Lenis({ lerp: 0.3, wrapper: scrollRef, content: scrollRef, wheelEventsTarget: scrollRef })
+
+    function raf(time: number) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+
+    requestAnimationFrame(raf)
+  })
 
   return (
     <>
