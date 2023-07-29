@@ -18,7 +18,6 @@ export default () => {
   let nowName = displayName()
 
   let nameTransitionLoop: NodeJS.Timer | null = null
-  let titleTransitionLoop: NodeJS.Timeout | null = null
 
   createEffect(() => {
     const newName = currentConversation() ? (currentConversation().name || t('conversations.untitled')) : ''
@@ -51,18 +50,7 @@ export default () => {
   })
 
   createEffect(() => {
-    let lastTitle = document.title
-    const thisTitle = currentConversation() ? `Anse • ${currentConversation().name || 'New Chat'}` : 'Anse'
-    titleTransitionLoop && clearInterval(titleTransitionLoop)
-    titleTransitionLoop = setInterval(() => {
-      if (lastTitle !== thisTitle) {
-        thisTitle.startsWith(lastTitle) ? (lastTitle = thisTitle.slice(0, lastTitle.length + 1)) : (lastTitle = lastTitle.slice(0, -1))
-        document.title = `${lastTitle} •`
-      } else {
-        clearInterval(titleTransitionLoop as NodeJS.Timer)
-        document.title = lastTitle
-      }
-    }, 1000 / 30)
+    document.title = currentConversation() ? `Anse • ${currentConversation().name || 'New Chat'}` : 'Anse'
   })
 
   return (

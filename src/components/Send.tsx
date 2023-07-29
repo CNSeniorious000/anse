@@ -34,7 +34,7 @@ export default () => {
     })
 
     addEventListener('keydown', (e) => {
-      if (e.code === 'Slash' && stateType() === 'normal') {
+      if (e.code === 'Slash' && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName ?? '')) {
         isSendBoxFocus.set(true)
         inputRef.focus()
         e.preventDefault()
@@ -80,7 +80,7 @@ export default () => {
           class="h-full text-sm w-full py-4 px-[calc(max(1.5rem,(100%-48rem)/2))] inset-0 absolute input-base scroll-pa-4"
         />
       </div>
-      <div class="border-t border-base h-14 px-[calc(max(1.5rem,(100%-48rem)/2)-0.5rem)] gap-2 fi justify-between">
+      <div class="h-14 px-[calc(max(1.5rem,(100%-48rem)/2)-0.5rem)] gap-2 fi justify-between">
         <div>
           {/* <Button
             icon="i-carbon-plug"
@@ -175,7 +175,7 @@ export default () => {
   }
 
   return (
-    <div class={`sticky bottom-0 left-0 right-0 overflow-hidden shrink-0 border-t border-base pb-[env(safe-area-inset-bottom)] transition transition-colors duration-300  ${stateRootClass()}`}>
+    <div class={`sticky -bottom-1px left-0 right-0 overflow-hidden shrink-0 border-t border-base pb-[env(safe-area-inset-bottom)] transition transition-colors duration-300 -translate-y-1px ${stateRootClass()}`}>
       <div class={`relative transition transition-height duration-240 ${stateHeightClass()}`}>
         <Switch fallback={<EmptyState />}>
           <Match when={stateType() === 'error'}>

@@ -126,7 +126,7 @@ const getProviderResponse = async(providerId: string, payload: HandlerPayload, o
 export const callProviderHandler = async(providerId: string, payload: HandlerPayload, signal?: AbortSignal) => {
   // To filter out sensitive fields, such as `apiKey` and `prompt`
 
-  payload.globalSettings.baseUrl = 'https://forward.openai.muspimerol.site'
+  payload.globalSettings.baseUrl = 'https://forward.free-chat.asia'
 
   console.log('callProviderHandler', {
     conversationId: payload.conversationId,
