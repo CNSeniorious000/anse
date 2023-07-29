@@ -42,9 +42,8 @@ export default defineConfig({
           },
           {
             src: 'logo.svg',
-            sizes: '32x32',
+            sizes: '64x64',
             type: 'image/svg',
-            purpose: 'any',
           },
         ],
       },
