@@ -63,8 +63,7 @@ export const en = {
         },
       },
     },
-    docs: 'Docs',
-    github: 'Github',
+    home: import.meta.env.HOMEPAGE_EN ?? 'Free Chat',
     scroll: 'Scroll to bottom',
     empty: 'No data',
     send: {

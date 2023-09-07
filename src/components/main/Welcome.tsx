@@ -8,10 +8,10 @@ export default () => {
   const $conversationMapSortList = useStore(conversationMapSortList)
 
   return (
-    <div class="fcc h-full">
+    <div class="fcc h-full select-none">
       <div class="flex flex-col gap-4 w-full max-w-md mx-12 sm:mx-18 overflow-hidden">
         <div class="px-6 py-4 bg-base-100 border border-base rounded-lg">
-          <h2 class="text-xs op-30 uppercase my-2">{t('conversations.recent')}</h2>
+          <h2 class="text-xs op-30 uppercase tracking-wider my-2">{t('conversations.recent')}</h2>
           <div class="flex flex-col items-start">
             <For each={$conversationMapSortList().slice(0, 3)}>
               {instance => (

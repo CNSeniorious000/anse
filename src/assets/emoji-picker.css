@@ -1,5 +1,5 @@
 .emoji-section-title {
-  @apply block text-xs mx-1 my-2 uppercase op-30;
+  @apply block text-xs mx-1 my-2 uppercase tracking-wider op-30;
 }
 
 .emoji-button {

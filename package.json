@@ -34,7 +34,7 @@
     "@zag-js/select": "^0.13.0",
     "@zag-js/slider": "^0.13.0",
     "@zag-js/solid": "^0.13.0",
-    "@zag-js/switch": "^0.13.0",
+    "@zag-js/switch": "^0.10.3",
     "@zag-js/tabs": "^0.13.0",
     "@zag-js/toast": "^0.13.0",
     "@zag-js/toggle": "^0.13.0",
