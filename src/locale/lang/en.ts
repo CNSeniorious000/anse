@@ -63,7 +63,7 @@ export const en = {
         },
       },
     },
-    home: import.meta.env.HOMEPAGE_EN ?? 'Free Chat',
+    home: import.meta.env.PUBLIC_HOMEPAGE_EN ?? 'Free Chat',
     scroll: 'Scroll to bottom',
     empty: 'No data',
     send: {

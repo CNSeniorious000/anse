@@ -63,7 +63,7 @@ export const zhCN = {
         },
       },
     },
-    home: import.meta.env.HOMEPAGE_CN ?? '官方主页',
+    home: import.meta.env.PUBLIC_HOMEPAGE_CN ?? '官方主页',
     github: '源码',
     scroll: '滚动到底部',
     empty: '暂无数据',

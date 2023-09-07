@@ -39,7 +39,7 @@ export default () => {
       <footer class="h-14 fi justify-between px-3">
         <ThemeToggle />
         <div text-xs op-60 px-2>
-          <a href={import.meta.env.HOMEPAGE_URL ?? 'https://free-chat.asia/'} target="_blank" rel="noopener noreferrer" class="hv-foreground">
+          <a href={import.meta.env.PUBLIC_HOMEPAGE_URL ?? 'https://free-chat.asia/'} target="_blank" rel="noopener noreferrer" class="hv-foreground">
             {t('home')}
           </a>
         </div>
