@@ -1,4 +1,4 @@
-import destr from 'destr'
+import { destr } from 'destr'
 import { getBotMetaById, getProviderById } from '@/stores/provider'
 import { updateConversationById } from '@/stores/conversation'
 import { clearMessagesByConversationId, getMessagesByConversationId, pushMessageByConversationId } from '@/stores/messages'
@@ -9,6 +9,8 @@ import { generateRapidProviderPayload, promptHelper } from './helper'
 import type { HandlerPayload, PromptResponse } from '@/types/provider'
 import type { Conversation } from '@/types/conversation'
 import type { ErrorMessage, Message } from '@/types/message'
+
+const baseUrl = import.meta.env.PUBLIC_OPENAI_API_BASE_URL
 
 export const handlePrompt = async(conversation: Conversation, prompt?: string, signal?: AbortSignal) => {
   const generalSettings = getGeneralSettings()
@@ -126,7 +128,7 @@ const getProviderResponse = async(providerId: string, payload: HandlerPayload, o
 export const callProviderHandler = async(providerId: string, payload: HandlerPayload, signal?: AbortSignal) => {
   // To filter out sensitive fields, such as `apiKey` and `prompt`
 
-  payload.globalSettings.baseUrl = 'https://forward.free-chat.asia'
+  payload.globalSettings.baseUrl = baseUrl ?? 'https://forward.free-chat.asia'
 
   console.log('callProviderHandler', {
     conversationId: payload.conversationId,

@@ -24,8 +24,8 @@ const { title } = Astro.props;
     <title>{title}</title>
     <meta name="description" content="Get answers from AI, elegantly." />
     {
-      import.meta.env.HEAD_SCRIPTS && (
-        <Fragment set:html={import.meta.env.HEAD_SCRIPTS} />
+      import.meta.env.PUBLIC_HEAD_SCRIPTS && (
+        <Fragment set:html={import.meta.env.PUBLIC_HEAD_SCRIPTS} />
       )
     }
     {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
