@@ -53,7 +53,7 @@ export default defineConfig({
   transformers: [transformerVariantGroup(), transformerDirectives()],
   shortcuts: [{
     'bg-base': 'bg-white dark:bg-[#101010]',
-    'bg-header': 'bg-gradient-to-b from-[#ffffffe0] dark:from-[#101010e0] via-[#ffffffd0] dark:via-[#101010d0] to-[#ffffffc0] dark:to-[#101010c0] backdrop-blur-20 backdrop-saturate-180',
+    'bg-header': 'bg-gradient-to-b from-[#ffffffc0] dark:from-[#101010e0] via-[#ffffffb0] dark:via-[#101010d0] to-[#ffffffa0] dark:to-[#101010c0] backdrop-blur-20 backdrop-saturate-180',
     'bg-base-100': 'bg-light-200/50 dark:bg-[#181818]',
     'bg-base-200': 'bg-light-400 dark:bg-[#202020]',
     'bg-blur': 'bg-light-200/85 dark:bg-[#101010]/85 backdrop-blur-xl backdrop-saturate-150',

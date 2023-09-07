@@ -10,8 +10,8 @@ export default () => {
   const $conversationMapSortList = useStore(conversationMapSortList)
 
   return (
-    <div class="h-full flex flex-col bg-sidebar">
-      <header class="h-14 fi justify-between px-4 text-xs uppercase">
+    <div class="h-full flex flex-col bg-sidebar select-none">
+      <header class="h-14 fi justify-between px-4 text-xs uppercase tracking-wider">
         <p class="px-2">{t('conversations.title')}</p>
         <div class="fi gap-1">
           {/* <Button

@@ -1,7 +1,7 @@
 import { createStores, rebuildStores } from '@/stores/storage/db'
 
 const buildStores = async() => {
-  await createStores()
+  createStores()
   await rebuildStores()
 }
 

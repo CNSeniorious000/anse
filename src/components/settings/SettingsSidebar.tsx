@@ -17,8 +17,8 @@ export default () => {
   }
 
   return (
-    <div class="h-full flex flex-col bg-sidebar">
-      <header class="h-14 fi border-b border-base px-4 text-xs uppercase">
+    <div class="h-full flex flex-col bg-sidebar select-none">
+      <header class="h-14 fi border-b border-base px-4 text-xs uppercase tracking-wider">
         {t('settings.title')}
       </header>
       <main class="flex-1 overflow-auto">
@@ -38,13 +38,9 @@ export default () => {
       </main>
       <footer class="h-14 fi justify-between px-3">
         <ThemeToggle />
-        <div text-xs op-40 px-2>
-          <a href="https://docs.anse.app" target="_blank" rel="noreferrer" class="hv-foreground">
-            {t('docs')}
-          </a>
-          <span class="px-1"> · </span>
-          <a href="https://github.com/anse-app/anse" target="_blank" rel="noreferrer" class="hv-foreground">
-            {t('github')}
+        <div text-xs op-60 px-2>
+          <a href={import.meta.env.PUBLIC_HOMEPAGE_URL ?? 'https://free-chat.asia/'} target="_blank" rel="noopener noreferrer" class="hv-foreground">
+            {t('home')}
           </a>
         </div>
       </footer>

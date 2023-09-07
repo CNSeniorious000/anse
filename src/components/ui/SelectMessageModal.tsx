@@ -10,7 +10,7 @@ export default () => {
   const { t } = useI18n()
   const $currentConversationId = useStore(currentConversationId)
   const messages = getMessagesByConversationId($currentConversationId())
-  const [checkAll, setCheckAll] = createSignal(messages.every(item => item.isSelected))
+  // const [checkAll, setCheckAll] = createSignal(messages.every(item => item.isSelected))
   const [selectedMessages, setSelectedMessages] = createSignal(messages)
 
   const handleToggleMessages = (id: string) => {
@@ -21,14 +21,14 @@ export default () => {
     setSelectedMessages(messages)
   }
 
-  const handleSelectAll = () => {
-    messages.forEach((item) => {
-      item.isSelected = !checkAll()
-    })
-    setSelectedMessages(messages)
-    setCheckAll(!checkAll())
-    console.log(selectedMessages(), checkAll())
-  }
+  // const handleSelectAll = () => {
+  //   messages.forEach((item) => {
+  //     item.isSelected = !checkAll()
+  //   })
+  //   setSelectedMessages(messages)
+  //   setCheckAll(!checkAll())
+  //   console.log(selectedMessages(), checkAll())
+  // }
 
   const handleSaveContext = () => {
     messages.forEach((item) => {
