@@ -21,9 +21,9 @@ const providerOpenAI = () => {
         description: 'Custom gpt model for OpenAI API.',
         type: 'select',
         options: [
-          { value: 'gpt-3.5-turbo', label: 'gpt-3.5-turbo' },
+          { value: 'gpt-3.5-turbo-1106', label: 'gpt-3.5-turbo-1106' },
         ],
-        default: 'gpt-3.5-turbo',
+        default: 'gpt-3.5-turbo-1106',
       },
       {
         key: 'maxTokens',
