@@ -58,6 +58,13 @@ const providerOpenAI = () => {
         default: 1,
         step: 0.1,
       },
+      {
+        key: 'baseUrl',
+        name: 'Base URL',
+        description: 'Custom base url for OpenAI API.',
+        type: 'input',
+        default: 'forward.free-chat.asia',
+      },
     ],
     bots: [
       {
