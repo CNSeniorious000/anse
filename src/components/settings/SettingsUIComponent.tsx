@@ -20,7 +20,7 @@ export default ({ settings, editing, value, setValue }: Props) => {
     <div class="my-2">
       <div class="text-xs op-50">{settings.name}</div>
       {editing() && settings.description && <div class="mt-1 text-xs op-30">{settings.description}</div>}
-      <div class="mt-1 text-sm">
+      <div class="mt-1 text-sm font-mono">
         <Switch>
           <Match when={settings.type === 'api-key'}>
             <SettingsApiKey

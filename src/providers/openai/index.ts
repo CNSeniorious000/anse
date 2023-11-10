@@ -21,7 +21,10 @@ const providerOpenAI = () => {
         description: 'Custom gpt model for OpenAI API.',
         type: 'select',
         options: [
+          { value: 'gpt-3.5-turbo-1106-0301', label: 'gpt-3.5-turbo-0301' },
+          { value: 'gpt-3.5-turbo-0613', label: 'gpt-3.5-turbo-0613' },
           { value: 'gpt-3.5-turbo-1106', label: 'gpt-3.5-turbo-1106' },
+          { value: 'gpt-4-1106-preview', label: 'gpt-4-1106-preview' },
         ],
         default: 'gpt-3.5-turbo-1106',
       },
@@ -54,6 +57,13 @@ const providerOpenAI = () => {
         max: 1,
         default: 1,
         step: 0.1,
+      },
+      {
+        key: 'baseUrl',
+        name: 'Base URL',
+        description: 'Custom base url for OpenAI API.',
+        type: 'input',
+        default: 'forward.free-chat.asia',
       },
     ],
     bots: [

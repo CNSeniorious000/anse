@@ -10,7 +10,7 @@ import type { HandlerPayload, PromptResponse } from '@/types/provider'
 import type { Conversation } from '@/types/conversation'
 import type { ErrorMessage, Message } from '@/types/message'
 
-const baseUrl = import.meta.env.PUBLIC_OPENAI_API_BASE_URL
+const baseUrl = import.meta.env.PUBLIC_OPENAI_API_BASE_URL ?? 'forward.free-chat.asia'
 
 export const handlePrompt = async(conversation: Conversation, prompt?: string, signal?: AbortSignal) => {
   const generalSettings = getGeneralSettings()
@@ -89,7 +89,7 @@ export const handlePrompt = async(conversation: Conversation, prompt?: string, s
   setLoadingStateByConversationId(conversation.id, false)
 
   // Update conversation title
-  if (providerResponse && bot.type === 'chat_continuous' && !conversation.name) {
+  if (providerResponse && !conversation.name) {
     const inputText = conversation.systemInfo || prompt!
     const rapidPayload = generateRapidProviderPayload(promptHelper.summarizeText(inputText), provider.id)
     const title = await getProviderResponse(provider.id, rapidPayload, { caller: callMethod }).catch(() => {}) as string || inputText
@@ -128,7 +128,8 @@ const getProviderResponse = async(providerId: string, payload: HandlerPayload, o
 export const callProviderHandler = async(providerId: string, payload: HandlerPayload, signal?: AbortSignal) => {
   // To filter out sensitive fields, such as `apiKey` and `prompt`
 
-  payload.globalSettings.baseUrl = baseUrl ?? 'https://forward.free-chat.asia'
+  const base = (payload.globalSettings.baseUrl || baseUrl)
+  payload.globalSettings.baseUrl = (/https?:\/\//.test(base)) ? base : `https://${base}`
 
   console.log('callProviderHandler', {
     conversationId: payload.conversationId,

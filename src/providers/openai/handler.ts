@@ -71,8 +71,10 @@ const handleImageGeneration = async(payload: HandlerPayload) => {
     body: {
       prompt,
       n: 1,
-      size: '512x512',
-      response_format: 'url', // TODO: support 'b64_json'
+      size: '1024x1024',
+      response_format: 'b64_json',
+      model: 'dall-e-3',
+      quality: 'hd',
     },
   })
   if (!response.ok) {
@@ -81,5 +83,6 @@ const handleImageGeneration = async(payload: HandlerPayload) => {
     throw new Error(errMessage)
   }
   const resJson = await response.json()
-  return resJson.data[0].url
+  const { b64_json, revised_prompt } = resJson.data[0]
+  return JSON.stringify({ b64_json, revised_prompt })
 }
