@@ -9,6 +9,12 @@ interface Props {
   // fetching: boolean
 }
 
+const getImgSrc = (content?: string) => {
+  if (!content) return ''
+  const result = JSON.parse(content)
+  return result.url ?? `data:image/jpeg;base64, ${result.b64_json}`
+}
+
 export default (props: Props) => {
   const messageInput = () => props.messages().length > 0 ? props.messages()[0] : null
   const messageOutput = () => props.messages().length > 1 ? props.messages()[1] : null
@@ -17,14 +23,14 @@ export default (props: Props) => {
       <div class="min-h-16 max-h-40 fi px-6 py-4 border-b border-base break-words overflow-y-scroll">
         <StreamableText
           class="w-full"
-          text={messageInput()?.content || ''}
+          text={JSON.parse(messageOutput()?.content ?? '{}')?.revised_prompt ?? (messageInput()?.content || '')}
         />
       </div>
       <div class="flex-1 fcc overflow-y-auto px-6">
         <Show when={messageOutput()?.content}>
           <img
             class="w-full max-w-[400px] aspect-1"
-            src={messageOutput()?.content}
+            src={getImgSrc(messageOutput()?.content)}
             alt={messageInput()?.content || ''}
             onError={e => e.currentTarget.classList.add('hidden')}
           />
