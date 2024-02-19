@@ -24,9 +24,10 @@ const providerOpenAI = () => {
           { value: 'gpt-3.5-turbo-0301', label: 'gpt-3.5-turbo-0301' },
           { value: 'gpt-3.5-turbo-0613', label: 'gpt-3.5-turbo-0613' },
           { value: 'gpt-3.5-turbo-1106', label: 'gpt-3.5-turbo-1106' },
-          { value: 'gpt-4-1106-preview', label: 'gpt-4-1106-preview' },
+          { value: 'gpt-3.5-turbo-0125', label: 'gpt-3.5-turbo-0125' },
+          { value: 'gpt-4-0125-preview', label: 'gpt-4-0125-preview' },
         ],
-        default: 'gpt-3.5-turbo-1106',
+        default: 'gpt-3.5-turbo-0125',
       },
       {
         key: 'maxTokens',
