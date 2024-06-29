@@ -55,7 +55,7 @@ export default () => {
         {messages.length
           ? (
             <div class="flex flex-col gap-2">
-              <div class="emerald-light-button mt-0 cursor-pointer mb-2" onClick={() => copy()}>{copied() ? t('copyed') : t('conversations.share.copy')}</div>
+              <div class="emerald-light-button mt-0 cursor-pointer mb-2" onClick={() => copy()}>{copied() ? t('copied') : t('conversations.share.copy')}</div>
               <For each={messages}>
                 {item => (
                   <div class="flex space-x-2">

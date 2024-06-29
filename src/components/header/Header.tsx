@@ -9,7 +9,7 @@ import ConversationMessageSettingButton from './ConversationMessageSettingButton
 export default () => {
   onMount(() => {
     useLargeScreen(() => {
-      // bug: when click the setting btn, toggle moible or PC mode, the sidebar will not close
+      // bug: when click the setting btn, toggle mobile or PC mode, the sidebar will not close
       showConversationSidebar.set(false)
       showSettingsSidebar.set(false)
     })

@@ -71,6 +71,6 @@ export const zhCN = {
       placeholder: '输入内容...',
       button: '发送',
     },
-    copyed: '已拷贝!',
+    copied: '已拷贝!',
   },
 } as language

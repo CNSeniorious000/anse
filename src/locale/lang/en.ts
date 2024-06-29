@@ -70,6 +70,6 @@ export const en = {
       placeholder: 'Enter Something...',
       button: 'Send',
     },
-    copyed: 'Copied',
+    copied: 'Copied',
   },
 } as language
