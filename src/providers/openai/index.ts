@@ -24,9 +24,10 @@ const providerOpenAI = () => {
           { value: 'gpt-3.5-turbo-0125', label: 'gpt-3.5-turbo' },
           { value: 'gpt-4-0125-preview', label: 'gpt-4-turbo-preview' },
           { value: 'gpt-4-turbo-2024-04-09', label: 'gpt-4-turbo' },
-          { value: 'gpt-4o-2024-05-13', label: 'gpt-4-omni' },
+          { value: 'gpt-4o-2024-05-13', label: 'gpt-4o' },
+          { value: 'gpt-4o-mini-2024-07-18', label: 'gpt-4o-mini' },
         ],
-        default: 'gpt-3.5-turbo-0125',
+        default: 'gpt-4o-mini-2024-07-18',
       },
       {
         key: 'maxTokens',
@@ -34,8 +35,8 @@ const providerOpenAI = () => {
         description: 'The maximum number of tokens to generate in the completion.',
         type: 'slider',
         min: 0,
-        max: 4096,
-        default: 2048,
+        max: 32768,
+        default: 4096,
         step: 1,
       },
       {
